@@ -57,5 +57,7 @@
     "globals": {
         "angular": false,
         "$": false
-    }
+    },
+
+    "-W100": false
 }
