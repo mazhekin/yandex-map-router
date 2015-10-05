@@ -9,7 +9,7 @@
 
             <ul my-sortable my-sortable-updated="vm.placemarksOrderChanged(startIndex, stopIndex)">
                 <li ng-repeat="placemark in vm.placemarks">
-                    <span ng-bind="placemark.name"></span>
+                    <span ng-bind="placemark.name"></span> <a href="javascript:void(0)" ng-click="vm.deletePoint(placemark)">[x]</a>
                 </li>
             </ul>
         </div>

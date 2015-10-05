@@ -13,6 +13,7 @@
         vm.addNewPoint = addNewPoint;
         vm.placemarks = [];
         vm.placemarksOrderChanged = placemarksOrderChanged;
+        vm.deletePoint = deletePoint;
 
         ///////////////////////////////////////////////////////////////
 
@@ -63,6 +64,16 @@
             });
 
             vm.placemarks = newPlacemarks;
+        }
+
+        function deletePoint(placemark) {
+            var index =  vm.placemarks.indexOf(placemark);
+
+            vm.map.removeOverlay(placemark);
+            vm.placemarks.splice(index, 1);
+
+            var points = vm.placemarks.map(function(item) { return item.getGeoPoint(); });
+            vm.polyline.setPoints(points);
         }
     }
 })();
