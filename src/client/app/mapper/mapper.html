@@ -12,6 +12,9 @@
                 </div>
                 <button type="submit" class="btn btn-default">Добавить точку</button>
             </form>
+            <div ng-repeat="point in vm.points">
+                {{point.name}} ({{point.lng | number:5}}, {{point.lat | number:5}})
+            </div>
         </div>
 
         <div class="col-xs-8">

@@ -36,6 +36,8 @@
 <!-- endbower -->
 <!-- endbuild -->
 
+<script src="https://api-maps.yandex.ru/1.1/index.xml" type="text/javascript"></script>
+
 <!-- build:js js/app.js-->
 <!-- inject:js -->
 <script src="/src/client/app/app.module.js"></script>
@@ -43,11 +45,12 @@
 <script src="/src/client/app/shared/shared.module.js"></script>
 <script src="/src/client/app/shared/modules/auth/auth.module.js"></script>
 <script src="/src/client/app/shared/modules/core/core.module.js"></script>
-<script src="/src/client/app/shared/modules/blocks/logger/logger.module.js"></script>
 <script src="/src/client/app/shared/modules/blocks/exception/exception.module.js"></script>
+<script src="/src/client/app/shared/modules/blocks/logger/logger.module.js"></script>
 <script src="/src/client/app/shared/modules/blocks/router/router.module.js"></script>
 <script src="/src/client/app/mapper/mapper.js"></script>
 <script src="/src/client/app/mapper/mapper.route.js"></script>
+<script src="/src/client/app/shared/constants.js"></script>
 <script src="/src/client/app/shared/services/cookies.service.js"></script>
 <script src="/src/client/app/shared/services/location.service.js"></script>
 <script src="/src/client/app/shared/services/yandex.service.js"></script>
@@ -58,9 +61,9 @@
 <script src="/src/client/app/shared/modules/core/config.js"></script>
 <script src="/src/client/app/shared/modules/core/constants.js"></script>
 <script src="/src/client/app/shared/modules/auth/widgets/myIsAuthorized.js"></script>
-<script src="/src/client/app/shared/modules/blocks/logger/logger.js"></script>
 <script src="/src/client/app/shared/modules/blocks/exception/exception-handler.provider.js"></script>
 <script src="/src/client/app/shared/modules/blocks/exception/exception.js"></script>
+<script src="/src/client/app/shared/modules/blocks/logger/logger.js"></script>
 <script src="/src/client/app/shared/modules/blocks/router/routehelper.js"></script>
 <!-- endinject -->
 
@@ -68,8 +71,6 @@
 <!-- endinject -->
 
 <!-- endbuild -->
-
-<script src="https://api-maps.yandex.ru/1.1/index.xml" type="text/javascript"></script>
 
 </body>
 </html>

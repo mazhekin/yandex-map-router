@@ -5,7 +5,7 @@
         .module('app.shared')
         .directive('myYandexMap', myYandexMap);
 
-    function myYandexMap() {
+    function myYandexMap(YMAPS) {
         var directive = {
             link: link,
             restrict: 'A',
@@ -18,11 +18,10 @@
         ///////////////////////////////////////
 
         function link(scope, element, attrs) {
-            /* global YMaps:false */
-            var map = new YMaps.Map(YMaps.jQuery(element)[0]);
-            map.addControl(new YMaps.Zoom());
+            var map = new YMAPS.Map(YMAPS.jQuery(element)[0]);
+            map.addControl(new YMAPS.Zoom());
             map.enableScrollZoom({smooth: true});
-            map.setCenter(new YMaps.GeoPoint(37.64, 55.76), 10);
+            map.setCenter(new YMAPS.GeoPoint(37.64, 55.76), 10);
             scope.getMap({map: map});
         }
     }

@@ -12,6 +12,7 @@
         vm.initialPoint = {};
         vm.getMap = getMap;
         vm.addNewPoint = addNewPoint;
+        vm.points = [];
 
         function activate() {
         }
@@ -30,7 +31,9 @@
         }
 
         function addNewPoint() {
-            vm.map.placeMark(vm.initialPoint.lng, vm.initialPoint.lat);
+            vm.points.push(angular.copy(vm.initialPoint));
+            vm.map.placeMark(vm.initialPoint.lng, vm.initialPoint.lat, vm.initialPoint.name);
+            vm.initialPoint = {};
         }
     }
 })();
