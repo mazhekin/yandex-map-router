@@ -31,7 +31,7 @@ if (!Array.prototype.map) {
         // 2. Положим lenValue равным результату вызова внутреннего метода Get
         //    объекта O с аргументом "length".
         // 3. Положим len равным ToUint32(lenValue).
-        /*jslint bitwise: true */
+        /* jslint bitwise: true */
         var len = O.length >>> 0;
 
         // 4. Если вызов IsCallable(callback) равен false, выкидываем исключение TypeError.

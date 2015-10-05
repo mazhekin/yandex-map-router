@@ -105,6 +105,7 @@ module.exports = function() {
         var options = {
             files: [].concat(
                 bowerFiles,
+                'https://api-maps.yandex.ru/1.1/index.xml',
                 config.specHelpers,
                 '**/*.module.js',
                 '**/*.js',
