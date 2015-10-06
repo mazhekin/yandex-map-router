@@ -3,11 +3,11 @@
         <div class="col-xs-4">
             <form ng-submit="vm.addNewPoint()">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Название новой точки маршрута (Enter)" ng-model="vm.newPointName">
+                    <input type="text" class="form-control" placeholder="Name of new point of route (Enter)" ng-model="vm.newPointName">
                 </div>
             </form>
 
-            <ul my-sortable my-sortable-updated="vm.placemarksOrderChanged(startIndex, stopIndex)">
+            <ul my-sortable my-sortable-updated="vm.pointsOrderChanged(startIndex, stopIndex)">
                 <li ng-repeat="placemark in vm.placemarks">
                     <span ng-bind="placemark.name"></span> <a href="javascript:void(0)" ng-click="vm.deletePoint(placemark)">[x]</a>
                 </li>

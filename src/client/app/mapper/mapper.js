@@ -12,7 +12,7 @@
         vm.getMap = getMap;
         vm.addNewPoint = addNewPoint;
         vm.placemarks = [];
-        vm.placemarksOrderChanged = placemarksOrderChanged;
+        vm.pointsOrderChanged = pointsOrderChanged;
         vm.deletePoint = deletePoint;
 
         ///////////////////////////////////////////////////////////////
@@ -45,7 +45,7 @@
             });
         }
 
-        function placemarksOrderChanged(startIndex, stopIndex) {
+        function pointsOrderChanged(startIndex, stopIndex) {
             var indexes = [];
             for (var i = 0; i < vm.placemarks.length; i++) {
                 indexes.push(i);

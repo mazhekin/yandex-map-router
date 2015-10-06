@@ -12,14 +12,6 @@ describe('advert.campaigns', function() {
     var scope;
 
     beforeEach(function() {
-        /*
-        sinon.stub(campaignsService, 'getCampaigns', function () {
-            return $q.when(campaigns);
-        });
-
-        sinon.stub(providersService, 'getProvider', function () {
-            return $q.when({id: 'foo'});
-        });*/
 
         scope = $rootScope.$new();
 
@@ -88,95 +80,70 @@ describe('advert.campaigns', function() {
             expect(YMAPS.Events.observe).toHaveBeenCalled();
         });
 
-        /*it('should load campaigns after event when store/provider changed', function () {
-         // act
-         scope.$broadcast('from.header.provider.changed', {providerId: 'foo'});
-         scope.$apply();
-         expect(controller.campaigns.length).toEqual(campaigns.length);
-         });*/
+        it('should change order according start and stop index', function () {
 
-        /*it('should catch event when editing campaign closed', function () {
+            function Placemark(point, name) {
+                this.point = point;
+                this.name = name;
+            }
 
-         // act
-         scope.$broadcast('campaigns.close.editCampaign');
-         scope.$apply();
+            Placemark.prototype.getGeoPoint = function() {
+                return this.point;
+            };
 
-         // assert
-         expect(controller.editCampaignOpened).toBeFalsy();
-         });*/
+            Placemark.prototype.setGeoPoint = function(point) {
+                this.point = point;
+            };
 
-        /* it('should call changeCampaignStatus when status change', function () {
             // arrange
-            var campaign = {id: 'foo'};
-            sinon.stub(campaignsService, 'changeCampaignStatus', function () {
-                return $q.when(campaign);
-            });
-            spyOn(scope, '$broadcast');
+            controller.placemarks = [
+                new Placemark({lat: 1, lng: 1}, 'name1'),
+                new Placemark({lat: 2, lng: 2}, 'name2')
+            ];
 
-            // act
-            controller.onStatusChange(campaign);
-            scope.$apply();
+            // act (move 1 -> 0)
+            controller.pointsOrderChanged(1, 0);
 
             // assert
-            //expect(scope.$broadcast).toHaveBeenCalledWith('campaign.refresh', campaign);
-        });*/
+            expect(controller.placemarks[0].name).toEqual('name2');
+            expect(controller.placemarks[0].point).toEqual({lat: 1, lng: 1});
 
-        /*it('should delete campaign correctly', function () {
-         // arrange
-         var lCampaigns = angular.copy(campaigns);
-         var campaign = lCampaigns[0];
-         sinon.stub(campaignsService, 'deleteCampaign', function () {
-         var deferred = $q.defer();
-         controller.campaigns.filter(function(item) { return item.id === campaign.id; });
-         deferred.resolve();
-         return deferred.promise;
-         });
+            expect(controller.placemarks[1].name).toEqual('name1');
+            expect(controller.placemarks[1].point).toEqual({lat: 2, lng: 2});
+        });
 
-         // act
-         controller.onCampaignDelete(campaign);
-         scope.$apply();
+        it('should delete point according specified placemark', function () {
 
-         // assert
-         var foundCampaigns = controller.campaigns.filter(function(item) { return item.id === campaign.id; });
-         expect(foundCampaigns.length).toBe(0);
-         });*/
-
-        /*it('should set new campaign for editing', function () {
-
-         // arrange
-         var newCampaign = {}; // campaignsMocks.getNewCampaign();
-
-         sinon.stub(campaignsService, 'getNewCampaign', function () {
-         var deferred = $q.defer();
-         deferred.resolve(newCampaign);
-         return deferred.promise;
-         });
-
-         // act
-         controller.onCampaignEdit();
-         scope.$apply();
-
-         // assert
-         expect(controller.campaigns[0]).toBe(newCampaign);
-         });*/
-        /*
-        it('should call changeCampaignsOrder when campaign list order changed', function () {
             // arrange
-            spyOn(campaignsService, 'changeCampaignsOrder');
+            function Placemark(point, name) {
+                this.point = point;
+                this.name = name;
+            }
 
-            var beforeIndex = 1;
-            var afterIndex = 2;
-            var ids = [1, 2, 3];
+            Placemark.prototype.getGeoPoint = function() {
+                return this.point;
+            };
+
+            controller.map = {removeOverlay: function () { }};
+            spyOn(controller.map, 'removeOverlay');
+
+            controller.placemarks = [
+                new Placemark({lat: 1, lng: 1}, 'name1'),
+                new Placemark({lat: 2, lng: 2}, 'name2')
+            ];
+
+            controller.polyline = {setPoints: function() {}};
+            spyOn(controller.polyline, 'setPoints');
 
             // act
-            controller.onCampaignListChanged(ids, beforeIndex, afterIndex);
+            controller.deletePoint(controller.placemarks[0]);
 
             // assert
-            expect(campaignsService.changeCampaignsOrder)
-                .toHaveBeenCalledWith('contentProgress', ids, beforeIndex, afterIndex);
-
-        });*/
+            expect(controller.map.removeOverlay).toHaveBeenCalled();
+            expect(controller.placemarks.length).toEqual(1);
+            expect(controller.placemarks[0]).toEqual(new Placemark({lat: 2, lng: 2}, 'name2'));
+            expect(controller.polyline.setPoints).toHaveBeenCalledWith([{lat: 2, lng: 2}]);
+        });
     });
-
 });
 
