@@ -1,6 +1,4 @@
-# Template Application 
-
-##(Starting point for create single page angular application)
+# Yandex Maps Test Application
 
 ## Quick Start
 Clone this repo and run the content locally
